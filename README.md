@@ -1,5 +1,5 @@
 <p>
-  <img alt="Schema" src="./sga.png" />
+  <img alt="Schema" src=".img/sga.png" />
   
 </p>
 
@@ -47,7 +47,7 @@ Para acessar a pagina do SGA é necessario fazer as seguintes configurações:
 `minikube service list`
 
 <p>
-  <img alt="Schema" src="./sga_service_list.png" />
+  <img alt="Schema" src=".img/sga_service_list.png" />
   
 </p>
 
@@ -56,7 +56,7 @@ Acessar as URLs geradas no navegador
 ## 4 - Acessando o Kubernetes Dashboard
 
 <p>
-  <img alt="Schema" src="./sga_dashboard.png" />
+  <img alt="Schema" src=".img/sga_dashboard.png" />
   
 </p>
 
