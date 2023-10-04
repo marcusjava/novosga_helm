@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-db-svc
+  labels: {{ include "novosga.db.labels" . | nindent 4 }}  
+spec:
+  type: {{ .Values.db.service.type | default "ClusterIP" }}
+  selector: {{ include "novosga.db.labels" . | nindent 4 }}
+  ports:
+    - port: {{ .Values.db.service.port | default "3306" }}

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: {{ .Values.app.replicas | default 1}}
+  selector:
+    matchLabels: {{ include "novosga.app.labels" . | nindent 4 }}
+  template:
+    metadata:
+      name: app-pod
+      labels: {{ include "novosga.app.labels" . | nindent 4 }}
+    spec:
+      containers:
+        - name: novosga-container
+          image: {{ .Values.app.image}}
+          resources:
+            requests:
+              cpu: {{ .Values.app.cpuRequest | quote | default "0.3" }}
+              memory: {{ .Values.app.memoryRequest | quote | default "256Mi" }}
+            limits:
+              cpu: {{ .Values.app.cpuLimit | quote | default "0.5" }}
+              memory: {{ .Values.app.memoryLimit | quote | default "512Mi" }}
+          ports:
+            {{- range $index, $value := .Values.app.containersPort  }}
+              - containerPort: {{ $value }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+      restartPolicy: Always
