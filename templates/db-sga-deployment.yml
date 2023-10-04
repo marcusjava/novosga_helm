@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-db-deployment
+  name: "{{ .Release.Name }}-db-deployment"
 spec:
   replicas: {{ .Values.db.replicas | default "1" }}
   selector:
@@ -29,6 +29,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: db-configmap
+            - secretRef:
+                name: db-secret
       restartPolicy: Always
       volumes:
         - name: mysql-vol
