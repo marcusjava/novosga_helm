@@ -33,15 +33,15 @@ app:
   service:
     nodePort: 30000
   secret:
-    APP_ENV: "prod"
-    # database connection
-    DATABASE_URL: "mysql://novosga:MySQL_App_P4ssw0rd!@db-service:3306/novosga2?charset=utf8mb4&serverVersion=5.7"
     # default admin user
     NOVOSGA_ADMIN_USERNAME: "admin"
     NOVOSGA_ADMIN_PASSWORD: "123456"
     NOVOSGA_ADMIN_FIRSTNAME: "Administrator"
     NOVOSGA_ADMIN_LASTNAME: "Global"
   configMap:
+    APP_ENV: "prod"
+    # database connection
+    DATABASE_URL: "mysql://novosga:MySQL_App_P4ssw0rd!@db-svc:3306/novosga2?charset=utf8mb4&serverVersion=5.7"
     # default unity
     NOVOSGA_UNITY_NAME: "My Unity"
     NOVOSGA_UNITY_CODE: "U01"

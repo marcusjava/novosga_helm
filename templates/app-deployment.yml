@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: {{ .Release.Name }}-app-deployment
 spec:
   replicas: {{ .Values.app.replicas | default 1}}
   selector:
-    matchLabels: {{ include "novosga.app.labels" . | nindent 4 }}
+    matchLabels: {{ include "novosga.app.labels" . | nindent 6 }}
   template:
     metadata:
       name: app-pod
-      labels: {{ include "novosga.app.labels" . | nindent 4 }}
+      labels: {{ include "novosga.app.labels" . | nindent 8 }}
     spec:
       containers:
         - name: novosga-container
-          image: {{ .Values.app.image}}
+          image: {{ .Values.app.image | quote | default "novosga/novosga:latest" }}
           resources:
             requests:
               cpu: {{ .Values.app.cpuRequest | quote | default "0.3" }}
