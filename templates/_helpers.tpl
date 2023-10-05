@@ -29,6 +29,10 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 server: db
 {{- end -}}
 
+{{- define "novosga.db.statefulset.labels" -}}
+server: db-statefulset
+{{- end -}}
+
 {{- define "novosga.app.labels" -}}
 app: novosga
 {{- end -}}
