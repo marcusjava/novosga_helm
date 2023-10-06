@@ -4,7 +4,7 @@ metadata:
   name: db-svc
   labels: {{ include "novosga.db.labels" . | nindent 4 }}  
 spec:
-  type: {{ .Values.db.service.type | default "ClusterIP" }}
+  clusterIP: "None"
   selector: {{ include "novosga.db.labels" . | nindent 4 }}
   ports:
     - port: {{ .Values.db.service.port | default "3306" }}

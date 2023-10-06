@@ -1,68 +1,55 @@
-<p>
-  <img alt="Schema" src=".img/sga.png" />
-  
-</p>
-
-<h1 align="center"> </h1>
-
-### Novo SGA Cluster Kubernetes
+<h1 align="center">Novo SGA Kubernetes Helm Charts </h1>
 
 ## 1 - Instalação.
 
-### Kubectl
+### Helm
 
-Kubernetes command-line tools(<a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>) permite executar comandos em seus clusters kubernetes
+Para realizar a instalação do (<a href="https://helm.sh/docs/intro/install/">Helm</a>) basta clicar no link.
 
-### Minikube
+### Repositorio Helm Chart.
 
-<a href='https://minikube.sigs.k8s.io/docs/start/' target="_blank">Minikube</a> é uma ferramenta que facilita o aprendizado e desenvolvimento com kubernetes de fácil instalação.
+#### 1 - Adicionando marcusrepo chart repository
 
-## 2 - Iniciando o cluster
+<strong>helm repo add [NAME] [URL]</strong>
 
-`minikube start --vm-driver=docker`
+`helm repo add marcusrepo https://marcusjava.github.io/helm-charts-repo/ `
 
-<a href="https://minikube.sigs.k8s.io/docs/drivers/" target="_blank">Ver lista de drivers</a>
+`helm install my-novosga marcusrepo/novosga --version 0.1.2 -n novosga --create-namespace`
 
-## 3 - Aplicando as configurações
+Executando o comando acima serão instalados com os valores padrão, caso deseja altera-los basta executar o seguinte comando para exporta para um arquivo:
 
-Criar os seguintes itens:
+`helm show values marcusrepo/novosga > values.yaml`
+
+#### Instalando o chart com os valores alterados:
+
+`helm install my-novosga marcusrepo/novosga --version 0.1.2 -f values.yaml`
+
+#### 2 - Verificando a instalação:
+
+`kubectl get all -n novosga`
 
 ```markdown
-├── db-sga-configmap.yml
-├── db-sga-deployment.yml
-├── db-sga-service.yml
-├── novosga-configmap.yml
-├── novosga-deployment.yml
-├── novosga-service.yml
+NAME READY STATUS RESTARTS AGE
+pod/novosga-app-deployment-647dfc47bd-5ct59 1/1 Running 0 37m
+pod/novosga-db-statefulset-0 1/1 Running 0 37m
+
+NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+service/app-svc NodePort 10.96.234.63 <none> 80:30000/TCP 37m
+service/db-svc ClusterIP None <none> 3306/TCP 37m
+
+NAME READY UP-TO-DATE AVAILABLE AGE
+deployment.apps/novosga-app-deployment 1/1 1 1 37m
+
+NAME DESIRED CURRENT READY AGE
+replicaset.apps/novosga-app-deployment-647dfc47bd 1 1 1 37m
+
+NAME READY AGE
+statefulset.apps/novosga-db-statefulset 1/1 37m
 ```
 
-`kubectl apply -f item`
+#### 3 - Desinstalando chart:
 
-## 4 - Acessando o NovoSGA
-
-Para acessar a pagina do SGA é necessario fazer as seguintes configurações:
-
-`minikube service novosga-service --url`
-
-`minikube service list`
-
-<p>
-  <img alt="Schema" src=".img/sga_service_list.png" />
-  
-</p>
-
-Acessar as URLs geradas no navegador
-
-## 4 - Acessando o Kubernetes Dashboard
-
-<p>
-  <img alt="Schema" src=".img/sga_dashboard.png" />
-  
-</p>
-
-Kubernetes Dashboard é ferramenta web onde é possível criar e modificar recursos como Deployments, Jobs, Services, verificar de forma visual consumo de CPU e memoria e monitorar o estado dos pods
-
-<a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank">Documentação</a>
+`helm uninstall novosga`
 
 ## Autor
 

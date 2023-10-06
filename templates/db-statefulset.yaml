@@ -5,11 +5,11 @@ metadata:
 spec:
   replicas: {{ .Values.db.replicas | default "1" }}
   selector:
-    matchLabels: {{ include "novosga.db.statefulset.labels" . | nindent 6 }}
+    matchLabels: {{ include "novosga.db.labels" . | nindent 6 }}
   template:
     metadata:
       name: db-pod
-      labels: {{ include "novosga.db.statefulset.labels" . | nindent 8 }}
+      labels: {{ include "novosga.db.labels" . | nindent 8 }}
     spec:
       containers:
         - name: db-sga-container
