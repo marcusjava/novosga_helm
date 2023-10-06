@@ -12,4 +12,13 @@ spec:
   storageClassName: local-storage
   local:
     path: /mnt/data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - kind-worker1
+                - kind-worker2
  

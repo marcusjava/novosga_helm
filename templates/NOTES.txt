@@ -1,8 +1,12 @@
 Thank you for installing {{ .Chart.Name }}.
 
-Your release is named {{ .Release.Name }}.
+CHART NAME: {{ .Chart.Name }}
+CHART VERSION: {{ .Chart.Version }}
+APP VERSION: {{ .Chart.AppVersion }}
+
+Your release is named {{ .Release.Name }} and is deployed in {{ .Release.Namespace }} namespace.
 
 To learn more about the release, try:
 
-  $ helm status {{ .Release.Name }}
-  $ helm get all {{ .Release.Name }}
+  $ helm status {{ .Release.Name }} -n {{ .Release.Namespace }}
+  $ helm get all {{ .Release.Name }} -n {{ .Release.Namespace }}

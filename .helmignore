@@ -21,4 +21,5 @@
 .idea/
 *.tmproj
 .vscode/
-templates/db-statefulset.yaml
+img
+README.md
