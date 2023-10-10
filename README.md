@@ -1,4 +1,4 @@
-<h1 align="center">Novo SGA Kubernetes Helm Charts </h1>
+<h1 align="center">Novo SGA Kubernetes Helm Charts Repository </h1>
 
 ## 1 - Instalação.
 
@@ -54,5 +54,3 @@ statefulset.apps/novosga-db-statefulset 1/1 37m
 ## Autor
 
 👤 **Marcus Vinicius**
-
-- Github: [marcusjava](https://github.com/marcusjava)

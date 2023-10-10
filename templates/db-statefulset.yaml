@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: "{{ .Release.Name }}-db-statefulset"
+  name: {{ .Release.Name }}-db-statefulset
 spec:
   replicas: {{ .Values.db.replicas | default "1" }}
   selector:
