@@ -1,4 +1,4 @@
-<h1 align="center">Novo SGA Kubernetes Helm Charts Repository </h1>
+<h1 align="center">Novo SGA Kubernetes Helm Charts </h1>
 
 ## 1 - Instalação.
 
