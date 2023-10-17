@@ -4,7 +4,7 @@ metadata:
   name: pv-slow
 spec:
   capacity:
-    storage: 500Mi
+    storage: {{- .Values.pv.capacity }}
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -19,6 +19,6 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - kind-worker1
-                - kind-worker2
- 
+                {{- range $index, $value := .Values.pv.selectedNodes }}
+                - {{ $value }}
+                {{- end }}

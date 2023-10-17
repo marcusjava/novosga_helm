@@ -3,6 +3,9 @@
 # Declare variables to be passed into your templates.
 
 db:
+  # DB is a statefullset with persistent volume for mysql data
+  # in local cluster kind or minikube directory path /mnt/data must be created before in node
+  nodeName: "kind-worker"
   replicas: "1"
   image: "mysql:5.7"
   cpuRequest: "0.3"
@@ -36,10 +39,10 @@ app:
     # default admin user
     NOVOSGA_ADMIN_USERNAME: "admin"
     NOVOSGA_ADMIN_PASSWORD: "123456"
-    NOVOSGA_ADMIN_FIRSTNAME: "Administrator"
+    NOVOSGA_ADMIN_FIRSTNAME: "Administrador"
     NOVOSGA_ADMIN_LASTNAME: "Global"
-    # database connection
-    DATABASE_URL: "mysql://novosga:MySQL_App_P4ssw0rd!@db-svc:3306/novosga2?charset=utf8mb4&serverVersion=5.7"
+    # database connection                             CHANGE NAME OF SERVICE!!!
+    DATABASE_URL: "mysql://novosga:MySQL_App_P4ssw0rd!@novosga-db-service:3306/novosga2?charset=utf8mb4&serverVersion=5.7"
   configMap:
     APP_ENV: "prod"
     # default unity
@@ -50,9 +53,18 @@ app:
     NOVOSGA_NOPRIORITY_DESCRIPTION: "Serviço Normal"
     # default priority
     NOVOSGA_PRIORITY_NAME: "Prioridade"
-    NOVOSGA_PRIORITY_DESCRIPTION: "Serviço prioriade"
+    NOVOSGA_PRIORITY_DESCRIPTION: "Serviço prioridade"
     # default place
     NOVOSGA_PLACE_NAME: "Guiche"
     # Set TimeZone and locale
     TZ: "America/Sao_Paulo"
     LANGUAGE: "pt_BR"
+# pv with local storage used for tests only
+pv:
+  capacity: "500Mi"
+  # pv.capacity.accessMode 
+  accessMode: 
+    - ReadWriteOnce
+  selectedNodes:
+    - kind-worker1
+
